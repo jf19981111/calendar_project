@@ -1,0 +1,197 @@
+@nice-blue: #5B83AD;
+@light-blue: @nice-blue + #111;
+.wrapper {
+  width: 1200px;
+  margin: 0 auto;
+  min-height: 800px;
+  background: pink;
+  overflow: hidden;
+  .wrapper_container {
+    width: 280px;
+    min-height: 375px;
+    // background: @light-blue;
+    background-color: #fff;
+    margin: 25% auto;
+    // color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    .calendar_input_wrap {
+      height: 34px;
+      padding: 6px 10px;
+      border-bottom: 1px solid #e8e8e8;
+      input {
+        width: 100%;
+        height: 22px;
+        color: rgba(0, 0, 0, 0.65);
+        // background: #fff;
+        border: 0;
+        outline: 0;
+        cursor: auto;
+        background: transparent;
+        height: 36px;
+        box-sizing: border-box;
+        line-height: 36px;
+      }
+    }
+    .calendar_date_panel {
+      .calendar_header {
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        border-bottom: 1px solid #e8e8e8;
+        user-select: none;
+        a {
+          text-decoration: none;
+          color: #000;
+        }
+        .year_btn {
+          position: absolute;
+          top: 0;
+          display: inline-block;
+          padding: 0 5px;
+          color: rgba(0, 0, 0, 0.45);
+          font-size: 16px;
+          font-family: Arial, 'Hiragino Sans GB', 'Microsoft Yahei', 'Microsoft Sans Serif', sans-serif;
+          line-height: 40px;
+          cursor: pointer;
+        }
+        .prev_year_btn {
+          left: 7px;
+          height: 100%;
+          &::before {
+            position: relative;
+            top: -1px;
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            vertical-align: middle;
+            border: 0 solid #aaa;
+            border-width: 1.5px 0 0 1.5px;
+            border-radius: 1px;
+            transform: rotate(-45deg) scale(0.8);
+            transition: all 0.3s;
+            content: '';
+          }
+          &::after {
+            position: relative;
+            top: -1px;
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            vertical-align: middle;
+            border: 0 solid #aaa;
+            border-width: 1.5px 0 0 1.5px;
+            border-radius: 1px;
+            transform: rotate(-45deg) scale(0.8);
+            transition: all 0.3s;
+            content: '';
+          }
+        }
+        .newt_year_btn {
+          right: 7px;
+          height: 100%;
+          &::before {
+            position: relative;
+            top: -1px;
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            vertical-align: middle;
+            border: 0 solid #aaa;
+            border-width: 1.5px 0 0 1.5px;
+            border-radius: 1px;
+            // transform: rotate(-45deg) scale(0.8);
+            transition: all 0.3s;
+            transform: rotate(135deg) scale(0.8);
+            content: '';
+          }
+          &::after {
+            position: relative;
+            top: -1px;
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            vertical-align: middle;
+            border: 0 solid #aaa;
+            border-width: 1.5px 0 0 1.5px;
+            border-radius: 1px;
+            // transform: rotate(-45deg) scale(0.8);
+            transition: all 0.3s;
+            content: '';
+            transform: rotate(135deg) scale(0.8);
+          }
+        }
+      }
+      .calendar_body {
+        padding: 8px 12px;
+        .c_body_head {
+          display: flex;
+          text-align: center;
+          span {
+            display: block;
+            width: 38px;
+            padding: 6px 0;
+            line-height: 18px;
+          }
+        }
+        .c_body_content {
+          display: flex;
+          text-align: center;
+          flex-direction: column;
+          .c_content_row {
+            display: flex;
+            .date_wrapper {
+              width: 38px;
+              padding: 3px 0;
+            }
+            span {
+              display: block;
+              line-height: 18px;
+              display: block;
+              width: 24px;
+              height: 24px;
+              padding: 0;
+              color: rgba(0, 0, 0, 0.65);
+              line-height: 24px;
+              text-align: center;
+              background: transparent;
+              border: 1px solid transparent;
+              border-radius: 2px;
+              -webkit-transition: background 0.3s ease;
+              transition: background 0.3s ease;
+              font-size: 14px;
+              cursor: pointer;
+              margin: 0 auto;
+              &:hover {
+                background: #e6f7ff;
+                cursor: pointer;
+              }
+              &:active {
+                color: #fff;
+                background: #40a9ff;
+              }
+            }
+          }
+          
+        }
+        .item_gray {
+          color: rgba(0, 0, 0, 0.25) !important;
+          background: transparent;
+          border-color: transparent;
+        }
+        .item_current {
+          color: #1890ff !important;
+          font-weight: bold !important;
+          border-color: #1890ff !important;
+          background: #bae7ff !important;
+        }
+      }
+    }
+    .calendar_date_panel .prev_year_btn:hover::before, .calendar_date_panel .prev_year_btn:hover::after {
+      border-color: rgba(0, 0, 0, 0.65);
+    }
+    .calendar_date_panel .newt_year_btn:hover::before, .calendar_date_panel .newt_year_btn:hover::after {
+      border-color: rgba(0, 0, 0, 0.65);
+    }
+  }
+}
