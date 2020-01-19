@@ -56,9 +56,10 @@ export const initMonthDayNumber = function(year) {
 /**
  * 计算出每月的第一天星期几
  */
-export const weekOfMonth = function () {
-  let y = CURRENTDATE.getFullYear()
-  let m = CURRENTDATE.getMonth()
+export const weekOfMonth = function (y,m) {
+  // let y = CURRENTDATE.getFullYear()
+  // let m = CURRENTDATE.getMonth()
   let myDate = new Date(y, m, '01').getDay()
+  myDate == 0 ? myDate = 7 : myDate
   return myDate
 }

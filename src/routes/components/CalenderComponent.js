@@ -49,15 +49,56 @@ export default class CalenderComponent extends Component {
  */
   componentWillMount() {
     let date_num_array = initMonthDayNumber(this.state.current_year)
-    let first_day = weekOfMonth();
+    let first_day = weekOfMonth(CURRENTDATE.getFullYear(), CURRENTDATE.getMonth());
     this.setState({ date_num_array: date_num_array, first_day: first_day });
   }
 
-  handleSselectCurrentDays = (e,item) => {
+  /**
+   * 日期选择
+   * @param s_day
+   */
+  handleSselectCurrentDays(e, s_day) {
     e && e.stopPropagation()
-    console.log(e, item, 'ssssssssssssssse')
+    let { select_year, select_month } = this.state;
     this.setState({
-      currentSelectDates: item
+      history_year: select_year,
+      history_month: select_month,
+      history_day: s_day,
+      select_day: s_day,
+    }, () => {
+      this.props.onSelectDate && this.props.onSelectDate(select_year, select_month + 1, s_day);
+    });
+  }
+
+
+  /**
+   * 前一个月
+   */
+  previousMonth = () => {
+    let { current_year, current_month, current_day,
+      select_year, select_month, select_day, date_num_array, first_day } = this.state;
+
+    if (select_month === 0) {
+      select_year = select_year - 1;
+      select_month = 11;
+      date_num_array = initMonthDayNumber(select_year);
+    } else {
+      select_month = select_month - 1;
+    }
+
+    first_day = weekOfMonth(select_year, select_month);
+    if (current_year === select_year &&
+      current_month === select_month) {
+      select_day = current_day;
+    } else {
+      select_day = current_day;
+    }
+    this.setState({
+      select_year: select_year,
+      select_month: select_month,
+      select_day: select_day,
+      date_num_array: date_num_array,
+      first_day: first_day,
     })
   }
 
@@ -86,6 +127,8 @@ export default class CalenderComponent extends Component {
 
     // 是将上个月显示的天数得到
     previous_month_days = date_num_array[previous_month];
+    // 因为为0的时候表示星期天
+    // first_day == 0 ? first_day = 7 : first_day
     for (let i = 0; i < first_day; i++) {
       // let previous_link = (<li className="item-gray" key={'previous' + i}>
       //   <a href="javascript:;">{previous_month_days - (first_day - i) + 1}</a>
@@ -129,7 +172,7 @@ export default class CalenderComponent extends Component {
       //     {currentText}
       //   </a>
       // </li>);
-      let current_link = (<div className={indexStyles.date_wrapper}><span onClick={(e) => {this.handleSselectCurrentDays(e, i + 1)}} className={currentClassName} key={'current' + i}>{currentText}</span></div>);
+      let current_link = (<div className={indexStyles.date_wrapper}><span onClick={(e) => { this.handleSselectCurrentDays(e, i + 1) }} className={currentClassName} key={'current' + i}>{currentText}</span></div>);
       current_days.push(current_link);
     }
 
@@ -166,7 +209,7 @@ export default class CalenderComponent extends Component {
       <div>
         <div className={indexStyles.wrapper}>
           {/* 实验看下输出内容是什么 */}
-          <div style={{marginTop: '50px',color: 'tomato', fontWeight: 900, fontSize: '32px'}}>
+          <div style={{ marginTop: '50px', color: 'tomato', fontWeight: 900, fontSize: '32px' }}>
             {`当前点击的日期是：${this.state.currentSelectDates || ''}号`}
           </div>
           <div className={indexStyles.wrapper_container}>
@@ -180,8 +223,8 @@ export default class CalenderComponent extends Component {
                 {/* 日期头部 */}
                 <div className={indexStyles.calendar_header}>
                   <div style={{ position: 'relative' }}>
-                    <a className={`${indexStyles.year_btn} ${indexStyles.prev_year_btn}`} role="button" title="上一年"></a>
-                    <span>2020年 1月</span>
+                    <a onClick={this.previousMonth} className={`${indexStyles.year_btn} ${indexStyles.prev_year_btn}`} role="button" title="上一年"></a>
+                    <span>{`${this.state.select_year} 年 ${this.state.select_month + 1} 月`}</span>
                     <a className={`${indexStyles.year_btn} ${indexStyles.newt_year_btn}`} role="buttom" title="下一年"></a>
                   </div>
                 </div>
