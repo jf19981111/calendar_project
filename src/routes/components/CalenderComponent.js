@@ -97,6 +97,9 @@ export default class CalenderComponent extends Component {
       select_year: select_year,
       select_month: select_month,
       select_day: select_day,
+      history_day: select_day,
+      history_month: select_month,
+      history_year: select_year,
       date_num_array: date_num_array,
       first_day: first_day,
     })
@@ -146,7 +149,12 @@ export default class CalenderComponent extends Component {
         currentClassName = `${indexStyles.item_current}`;
         // currentText = '今天';
         currentText = i + 1;
-      } else {
+      } else if (history_year == select_year && history_month == select_month && history_day == (i + 1)) {
+        currentClassName = `${indexStyles.item_history}`;
+        // currentText = '今天';
+        currentText = i + 1;
+      }
+      else {
         currentText = i + 1;
 
         // 判断选择样式与历史样式是否相等，相等激活
